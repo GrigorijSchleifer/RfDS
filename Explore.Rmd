@@ -1,0 +1,39 @@
+---
+title: "Explore"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Explore section
+
+```{r}
+library(tidyverse)
+
+# ggplot creates a coordinate system that you can add layers to
+ggplot(data = mpg) +
+    # geom_point is a layer on top of the coordinate system
+    # each layer takes a mapping argument
+    # mapping: how are visual objects mapped on the coordinate system
+    # color asthetic can be written as colour as well (Wickham style, British)
+    geom_point(mapping = aes(x = displ, y = hwy, color = class, size = class))
+
+# alpha for class
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+
+# shape for class
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+
+# we can select aesthetics properties manually
+# Here, the color doesn’t convey information about a variable
+# but only changes the appearance of the plot
+# otherwise aes() function gathers together each of the aesthetic mappings 
+# used by a layer and passes them to the layer’s mapping argument
+ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+
+```
