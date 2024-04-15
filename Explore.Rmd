@@ -11,31 +11,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(tidyverse)
-
-# ggplot creates a coordinate system that you can add layers to
-ggplot(data = mpg) +
-    # geom_point is a layer on top of the coordinate system
-    # each layer takes a mapping argument
-    # mapping: how are visual objects mapped on the coordinate system
-    # color asthetic can be written as colour as well (Wickham style, British)
-    geom_point(mapping = aes(x = displ, y = hwy, color = class)) +
-    facet_grid(. ~ cyl, rows = 2)
-
-# alpha for class
-ggplot(data = mpg) +
-    geom_point(mapping = aes(x = displ, y = hwy, stroke = hwy))
-
-# shape for class
-ggplot(data = mpg) +
-    geom_point(mapping = aes(x = class, y = hwy, shape = hwy))
-
-# we can select aesthetics properties manually
-# Here, the color doesn’t convey information about a variable
-# but only changes the appearance of the plot
-# otherwise aes() function gathers together each of the aesthetic mappings 
-# used by a layer and passes them to the layer’s mapping argument
-ggplot(data = mpg) +
-    geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
-# hello
-
+library(palmerpenguins)
+library(ggthemes)
 ```
+
+```{r}
+pngs <- palmerpenguins::penguins
+glimpse(pgns)
+```
+
+```{r}
+# starting with the first ggplot layer similar to a canvas
+ggplot(data = pngs) %>% 
+    
+```
+
