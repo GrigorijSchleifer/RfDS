@@ -22,7 +22,10 @@ glimpse(pgns)
 
 ```{r}
 # starting with the first ggplot layer similar to a canvas
-ggplot(data = pngs) %>% 
+ggplot(
+    data = pngs,
+    mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
+    # geometrical object that representa the data
+    geom_point()
     
 ```
-
