@@ -20,7 +20,7 @@ library(ggthemes)
 
 ```{r}
 pngs <- palmerpenguins::penguins
-glimpse(pgns)
+glimpse(pngs)
 ```
 
 ```{r}
@@ -33,7 +33,8 @@ ggplot(
     # geometrical object that representa the data
     # each geom function can have own aesthetics
     # aesthetic mappings at the local level
-    geom_point(mapping = aes(color = species, shape = species)) + 
+    geom_point(mapping = aes(color = species, 
+                             shape = species)) + 
     # new geometric object based on a linear model
     geom_smooth(method = "lm") +
     labs(
@@ -45,46 +46,3 @@ ggplot(
         shape = "Species") +
     scale_color_colorblind()
 ```
-
-```{r Make a scatterplot of bill_depth_mm vs. bill_length_mm}
-pngs %>% 
-    subset(!na.rm()) %>% 
-    ggplot(
-        # aesthetic on the global level, passed down to all subsequent geom layers
-        mapping = aes(x = bill_length_mm, 
-                      y = bill_depth_mm)) +
-        # geometrical object that representa the data
-        # each geom function can have own aesthetics
-        # aesthetic mappings at the local level
-        geom_point(mapping = aes(color = species, 
-                                 shape = species,
-                                 na.rm = TRUE)) + 
-        # new geometric object based on a linear model
-        geom_smooth(method = "lm") +
-        labs(
-            title = "Bill length and Bill depth",
-            subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-            x = "Bill length (mm)", 
-            y = "Bill depth (mm)",
-            color = "Species", 
-            shape = "Species") +
-        scale_color_colorblind()
-```
-
-```{r}
-ggplot(
-    data = pngs,
-    # aesthetic on the global level, passed down to all subsequent geom layers
-    mapping = aes(x = species, 
-                  y = bill_depth_mm)) +
-    # geometrical object that representa the data
-    # each geom function can have own aesthetics
-    # aesthetic mappings at the local level
-    geom_col(mapping = aes(color = species)) + 
-    labs(
-        title = "Bill length and Bill depth",
-        subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
-        x = "Bill length (mm)", 
-        y = "Bill depth (mm)")
-```
-
