@@ -46,3 +46,54 @@ ggplot(
         shape = "Species") +
     scale_color_colorblind()
 ```
+
+## 1.4 Visualizing distributions
+### 1.4.1 A categorical variable
+
+```{r}
+ggplot(pngs, 
+       aes(x = fct_infreq(species))) +
+    geom_bar()
+```
+
+## 1.4.2 A numerical variable
+
+```{r}
+ggplot(pngs,
+       aes(x = body_mass_g)) +
+    # depending on the scale of the x axis
+    geom_histogram(binwidth = 20)
+```
+
+```{r}
+# density plot
+ggplot(pngs, 
+       aes(x = body_mass_g)) +
+    # smoothed out version of the histogram
+    geom_density()
+```
+
+# 1.5 Visualizing relationships
+## 1.5.1 A numerical and a categorical variable
+
+```{r}
+ggplot(pngs,
+       aes(x = species,
+           y = body_mass_g)) +
+    geom_boxplot()
+```
+
+```{r}
+ggplot(pngs, 
+       aes(x = body_mass_g, fill = species, color = species)) + 
+    geom_density(alpha = 0.5)
+```
+
+# 1.5.2 Two categorical variables
+
+```{r Stacked bar plots for two categorical relationsships}
+ggplot(pngs,
+       aes(x = island, fill = species)) +
+    geom_bar()
+```
+

@@ -1,3 +1,4 @@
+# 1.2.5 Exercises
 
 ```{r 3: Make a scatterplot of bill_depth_mm vs. bill_length_mm. That is, make a scatterplot with bill_depth_mm on the y-axis and bill_length_mm on the x-axis. Describe the relationship between these two variablesm}
 
@@ -70,5 +71,69 @@ ggplot(
         y = body_mass_g)) +
     geom_point(aes(color = bill_depth_mm)) +
     geom_smooth()
+```
+
+```{r 9: Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.}
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, 
+                y = body_mass_g,
+                # aesthetic for global level?
+                color = island)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
+    # aesthetic for local level?
+    geom_point(aes(color = island)) +
+    geom_smooth(se = TRUE)
+```
+
+```{r 10: Will these two graphs look different? Why/why not?}
+ggplot(
+  data = penguins,
+  # the aesthetic will be visible for both geoms
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point() +
+  geom_smooth()
+
+
+ggplot() +
+  geom_point(
+    data = penguins,
+    mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_smooth(data = penguins,
+    mapping = aes(x = flipper_length_mm, y = body_mass_g),
+    method = "lm")
+```
+
+# 1.4.3 Exercises
+
+```{r 1: Make a bar plot of species of penguins, where you assign species to the y aesthetic. How is this plot different?}
+ggplot(pngs, 
+       aes(y = fct_infreq(species))) +
+    geom_bar()
+```
+
+
+```{r 2: How are the following two plots different? Which aesthetic, color or fill, is more useful for changing the color of bars?}
+ggplot(pngs,
+       aes(x = fct_infreq(species))) +
+    geom_bar(color = "red")
+
+ggplot(pngs, 
+       aes(x = fct_infreq(species))) +
+    # fill is better for coloring the whole bar
+    geom_bar(fill = "red")
+```
+
+```{r 4: Make a histogram of the carat variable in the diamonds dataset that is available when you load the tidyverse package}
+
+ggplot(diamonds,
+       aes(x = carat)) +
+    geom_histogram(binwidth = 0.1)
+
 ```
 
