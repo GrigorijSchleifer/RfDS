@@ -97,3 +97,22 @@ ggplot(pngs,
     geom_bar()
 ```
 
+```{r}
+# relative frequency plot created by setting position = "fill" in the geom
+ggplot(pngs, 
+        aes(x = island, fill = species)) +
+    geom_bar(position = "fill")
+```
+
+# 1.5.4 Three or more variables
+
+```{r}
+ggplot(pngs, 
+       aes(x = flipper_length_mm,
+           y = body_mass_g)) +
+    # shape as third variable for creating shapes
+    geom_point(aes(color = species, shape = island)) +
+    # variable should be categorical
+    facet_wrap(~island)
+```
+
