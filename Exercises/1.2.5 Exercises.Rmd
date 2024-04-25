@@ -165,8 +165,33 @@ glimpse(mpg)
 ```{r}
 ggplot(mpg, 
        aes(x = hwy,
-           y = displ)) +
-    geom_point(aes(color = cyl, size = cty, shape = class))
+           y = displ,
+           color = cty)) +
+    geom_point(aes(size = cty, shape = class))
 ```
 
+
+Make a scatterplot of bill_depth_mm vs. bill_length_mm and color the points by species. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by species?
+
+```{r}
+ggplot(pngs, 
+       aes(x = bill_depth_mm,
+           y = bill_length_mm)) +
+    geom_point(aes(color = species)) +
+    facet_wrap(~species)
+```
+
+```{r}
+ggplot(
+  data = penguins,
+  mapping = aes(
+    x = bill_length_mm, 
+    y = bill_depth_mm, 
+    shape = species,
+    color = species)) +
+  geom_point() +
+  # both shape and color should be renamed!!!!
+  labs(color = "Species",
+       shape = "Species")
+```
 
