@@ -1,5 +1,20 @@
 # 1.2.5 Exercises
 
+Loading the packages
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(ggthemes)
+```
+
+Loading the data
+
+```{r}
+pngs <- palmerpenguins::penguins
+glimpse(pngs)
+```
+
 ```{r 3: Make a scatterplot of bill_depth_mm vs. bill_length_mm. That is, make a scatterplot with bill_depth_mm on the y-axis and bill_length_mm on the x-axis. Describe the relationship between these two variablesm}
 
 ggplot(pngs,
@@ -39,8 +54,8 @@ ggplot(
 ```
 
 ```{r 5: Why does the following give an error and how would you fix it?}
-ggplot(data = penguins) + 
-  geom_point()
+# ggplot(data = penguins) + 
+  # geom_point()
 # no aesthetic mappings are provided
 ```
 
@@ -136,4 +151,22 @@ ggplot(diamonds,
     geom_histogram(binwidth = 0.1)
 
 ```
+
+# 1.5.5 Exercises
+
+1: The mpg data frame that is bundled with the ggplot2 package contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Which variables in mpg are categorical? Which variables are numerical? (Hint: Type ?mpg to read the documentation for the dataset.) How can you see this information when you run mpg?
+
+```{r}
+glimpse(mpg)
+```
+
+2: Make a scatterplot of hwy vs. displ using the mpg data frame. Next, map a third, numerical variable to color, then size, then both color and size, then shape. How do these aesthetics behave differently for categorical vs. numerical variables?
+
+```{r}
+ggplot(mpg, 
+       aes(x = hwy,
+           y = displ)) +
+    geom_point(aes(color = cyl, size = cty, shape = class))
+```
+
 
