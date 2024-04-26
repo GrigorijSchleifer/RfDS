@@ -193,5 +193,23 @@ ggplot(
   # both shape and color should be renamed!!!!
   labs(color = "Species",
        shape = "Species")
+ggsave(filename = "some_test_file.png")
 ```
+
+# 1.6.1 Exercises
+
+```{r}
+ggplot(mpg, aes(x = class)) +
+  geom_bar()
+ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+
+# the last plot that is made is saved
+ggsave("mpg-plot.png")
+```
+
+```{r}
+
+```
+
 

@@ -112,7 +112,7 @@ ggplot(pngs,
            y = body_mass_g)) +
     # shape as third variable for creating shapes
     geom_point(aes(color = species, shape = island)) +
-    # variable should be categorical
+    # variable should be categori
     facet_wrap(~island)
 ```
 
