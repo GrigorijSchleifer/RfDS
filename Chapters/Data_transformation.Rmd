@@ -1,0 +1,19 @@
+```{r}
+library(nycflights13)
+library(tidyverse)
+```
+
+```{r}
+nycflights13::flights |>
+  dplyr::filter(dest == "IAH") |> 
+  group_by(year, month, day) |> 
+  summarize(arr_delay = mean(arr_delay, na.rm = TRUE))
+```
+
+```{r}
+nycflights13::flights %>% 
+  dplyr::filter(dest == "IAH") %>%  
+  group_by(month, day) %>%   
+  summarize(arr_delay = mean(arr_delay, na.rm = TRUE))
+```
+

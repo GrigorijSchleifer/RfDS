@@ -1,0 +1,19 @@
+```{r}
+libary(tidyverse)
+
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+    geom_point() +
+    geom_smooth(method = "lm")
+```
+
+## Let’s revisit an exercise from the Section 1.6. Run the following lines of code. Which of the two plots is saved as mpg-plot.png? Why?
+
+```{r}
+my_bar_plot <- ggplot(mpg, aes(x = class)) +
+  geom_bar()
+my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
+```
+
