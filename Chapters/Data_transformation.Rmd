@@ -4,16 +4,42 @@ library(tidyverse)
 ```
 
 ```{r}
-nycflights13::flights |>
+flights <- nycflights13::flights 
+```
+
+
+
+```{r welcome |> !!!}
+flights |>
   dplyr::filter(dest == "IAH") |> 
   group_by(year, month, day) |> 
   summarize(arr_delay = mean(arr_delay, na.rm = TRUE))
 ```
 
 ```{r}
-nycflights13::flights %>% 
+flights %>% 
   dplyr::filter(dest == "IAH") %>%  
   group_by(month, day) %>%   
   summarize(arr_delay = mean(arr_delay, na.rm = TRUE))
 ```
+
+```{r}
+glimpse(flights)
+```
+
+```{r & and |}
+flights |> 
+    # "and" condition
+    dplyr::filter(origin == "JFK" & dest == "BOS") |> 
+    # dplyr::filter(origin == "JFK" | origin == "BOS") or condition
+    count(flight) |> 
+    arrange(desc(n))
+```
+
+```{r}
+flights |> 
+    dplyr::filter(dest %in% c("MIA", "BOS")) |> 
+    count(dest)
+```
+
 
