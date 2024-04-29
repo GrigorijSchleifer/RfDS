@@ -31,15 +31,18 @@ glimpse(flights)
 flights |> 
     # "and" condition
     dplyr::filter(origin == "JFK" & dest == "BOS") |> 
+    distinct(flight) |> 
     # dplyr::filter(origin == "JFK" | origin == "BOS") or condition
     count(flight) |> 
-    arrange(desc(n))
+    arrange(desc(flight))
 ```
 
-```{r}
+```{r %in%\\}
 flights |> 
     dplyr::filter(dest %in% c("MIA", "BOS")) |> 
-    count(dest)
+    count(origin, month, sort = TRUE) |> 
+    group_by(origin) |> 
+    summarise(mean = mean(n))
 ```
 
 
