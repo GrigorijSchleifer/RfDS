@@ -11,6 +11,8 @@ In a single pipeline for each condition, find all flights that meet the conditio
 
 ```{r}
 flights |> 
+	# hello RStudion from vim!!!!
+	# and does it work if open in RS
     dplyr::filter(arr_delay >= 2 & dep_delay == 0,
                   dest %in% c("IAH", "HOU"),
                   carrier %in% c("UA", "AA", "DL"),
@@ -26,20 +28,27 @@ flights |>
     summary()
 
 flights |> 
-    dplyr::filter(dest == c("IAH", "HOU")) |> 
+    dplyr::filter(dest %in% c("IAH", "HOU")) |> 
     select(dest) |> 
     count(dest)
 
 flights |> 
-    dplyr::filter(carrier == c("UA", "AA", "DL")) |> 
+    dplyr::filter(carrier %in% c("UA", "AA", "DL")) |> 
     select(carrier) |> 
     count(carrier)
 
-
 flights |> 
-    dplyr::filter(month %in% (1:3)) |> 
+    dplyr::filter(month %in% (7:9)) |> 
     select(month) |> 
     count(month)
 
+flights |> 
+    dplyr::filter(arr_delay >= 120 & dep_delay <= 0) |> 
+    select(arr_delay, dep_delay) |> 
+    summarise(min(arr_delay, na.rm = TRUE), min(dep_delay, na.rm = TRUE))
+
+flights |> 
+    dplyr::filter(arr_delay >= 60 & dep_delay - arr_delay >= 30) |> 
+    select(arr_delay, dep_delay)  
 ```
 
