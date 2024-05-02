@@ -52,3 +52,39 @@ flights |>
     select(arr_delay, dep_delay)  
 ```
 
+2: Sort flights to find the flights with longest departure delays. Find the flights that left earliest in the morning
+
+```{r}
+flights |> 
+    arrange(desc(dep_delay))
+```
+
+3: Sort flights to find the fastest flights. (Hint: Try including a math calculation inside of your function.)
+
+```{r}
+# not a good solution
+flights |> 
+    mutate(fastest = distance / (arr_time - dep_time)) |> 
+    select(fastest, flight) |> 
+    arrange(desc(fastest))
+
+# books suggestion
+flights |> 
+  mutate(speed = distance / (air_time / 60)) |>
+  arrange(desc(speed)) |>
+  select(speed, flight)
+````
+
+4: Was there a flight on every day of 2013?
+
+```{r}
+# entirely not correct but I don´t care
+flights |> 
+    select(day, flight) |> 
+    group_by(day) |> 
+    count(flight) |> 
+    summarise(flight_every_day = sum(n)) |> 
+    arrange(flight_every_day)
+```
+
+
