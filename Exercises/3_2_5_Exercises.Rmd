@@ -88,3 +88,10 @@ flights |>
 ```
 
 
+```{r}
+flights |> 
+    group_by(origin) |> 
+    count(origin, dest, sort = TRUE)
+```
+
+

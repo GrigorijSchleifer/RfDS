@@ -1,0 +1,23 @@
+```{r Compare dep_time, sched_dep_time, and dep_delay. How would you expect those three numbers to be related?}
+flights |>
+    # dep_time to be sched_dep_time + dep_delay
+    select(contains("dep"))
+```
+
+```{r Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights}
+flights |> 
+    select(dep_time, dep_delay, arr_time, arr_delay)
+    
+flights |> 
+    select(contains(c("time", "dep", "arr")))
+
+
+flight |> 
+    
+```
+
+```{r}
+
+```
+
+
