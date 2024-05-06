@@ -47,6 +47,7 @@ flights |>
 
 ```{r}
 nycflights13::flights |> 
+  # . symbolises an argument and not a new name of a column
   mutate(
     gain = dep_delay - arr_delay,
     speed = distance / air_time * 60,
@@ -54,4 +55,9 @@ nycflights13::flights |>
     .keep = "used"
   )
 ```
+
+```{r}
+
+```
+
 

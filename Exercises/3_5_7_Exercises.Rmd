@@ -1,0 +1,8 @@
+```{r slice_ methods}
+flights |> 
+    group_by(month) |> 
+    slice_max(dep_delay) |> 
+    relocate(dep_delay) |> 
+    arrange(desc(dep_delay))
+```
+

@@ -5,19 +5,47 @@ flights |>
 ```
 
 ```{r Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights}
+variables <- c("dep_time", "dep_delay", "arr_time", "arr_delay")
+
 flights |> 
     select(dep_time, dep_delay, arr_time, arr_delay)
     
 flights |> 
     select(contains(c("time", "dep", "arr")))
 
+flights |> 
+    select(dep_time:arr_delay, -contains("sched"))
 
-flight |> 
+flights |> 
+    relocate(dep_time, dep_delay, arr_time, arr_delay) |> 
     
+
+flights[c("dep_time", "dep_delay", "arr_time", "arr_delay")]
+
+flights[colnames(flights) %in% variables]
+
+flights |> 
+    select(any_of(variables))
 ```
 
-```{r}
+```{r Rename air_time to air_time_min to indicate units of measurement and move it to the beginning of the data frame.}
+flights |> 
+    rename(air_time_min = air_time) |> 
+    relocate(air_time_min, .before = 1)
+```
 
+```{r Find the fastest flights to Houston’s IAH airport}
+flights |> 
+    arrange(air_time) |> 
+    dplyr::filter(dest == "IAH") |> 
+    relocate(dest, air_time)
+
+# of course it is better to calculate speed and use this to arrange 
+flights |> 
+    dplyr::filter(dest == "IAH") |> 
+    mutate(speed = distance / air_time * 60) |> 
+    relocate(dest, speed, flight, air_time) |> 
+    arrange(speed)
 ```
 
 
