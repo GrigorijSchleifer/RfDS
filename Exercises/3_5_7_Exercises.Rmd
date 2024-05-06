@@ -6,3 +6,16 @@ flights |>
     arrange(desc(dep_delay))
 ```
 
+```{r}
+flights |> 
+    group_by(year, month, day) |>
+    summarise(n = n()) |> 
+    summarise(mean = mean(month))
+
+flights |> 
+    group_by(year, month, day) |>
+    summarise(n = n(),
+              .groups = "drop") |> 
+    summarise(mean = mean(month))
+```
+
