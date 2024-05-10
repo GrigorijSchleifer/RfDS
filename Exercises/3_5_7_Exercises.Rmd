@@ -70,3 +70,80 @@ flights |>
     geom_smooth()
 ```
 
+```{r What happens if you supply a negative n to slice_min() and friends?}
+# negative number arranges the df in ascending 
+flights |> 
+    slice_min(dep_delay,
+              n = 5) |> 
+    relocate(dep_delay)
+
+flights |> 
+    slice_min(dep_delay,
+              n = -5) |> 
+    relocate(dep_delay)
+
+flights |> 
+  slice_max(dep_delay, 
+            n = -5) |>
+  relocate(dep_delay)
+
+flights |> 
+  slice_max(dep_delay, 
+            n = 5) |>
+  relocate(dep_delay)
+```
+
+
+```{r Explain what count() does in terms of the dplyr verbs you just learned. What does the sort argument to count() do?}
+flights |> 
+    count(month, flight,
+          sort = TRUE) |> 
+    group_by(month) |> 
+    slice_max(order_by = n,
+              n = 2)
+
+flights |> 
+    dplyr::filter(month == 6 & flight == 15) |> 
+    count(flight)
+```
+
+```{r Suppose we have the following tiny data frame}
+df <- tibble(
+  x = 1:5,
+  y = c("a", "b", "a", "a", "b"),
+  z = c("K", "K", "L", "L", "K")
+)
+
+# will not be the same df but a tibbel with two groups for a and b
+df |>
+  group_by(y)
+
+
+
+# Write down what you think the output will look like, then check if you were correct, and describe what arrange() does. Also comment on how it’s different from the group_by() in part (a)?
+
+# aaabb, will not group only arrange and change row order
+df |>
+  arrange(y)
+
+
+# Write down what you think the output will look like, then check if you were correct, and describe what the pipeline does.
+df |>
+  group_by(y) |>
+  summarize(mean_x = mean(x))
+
+
+df |>
+  group_by(y, z) |>
+  summarize(mean_x = mean(x))
+
+df |>
+  group_by(y, z) |>
+  mutate(mean_x = mean(x))
+
+# the df will not have a grouping anymore
+df |>
+  group_by(y, z) |>
+  summarize(mean_x = mean(x), .groups = "drop")
+```
+
