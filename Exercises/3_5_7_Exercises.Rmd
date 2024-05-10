@@ -27,18 +27,46 @@ flights |>
 ```
 
 ```{r Which carrier has the worst average delays? Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights |> group_by(carrier, dest) |> summarize(n()))}
+
 flights |> 
     group_by(carrier, dest) |> 
     summarise(delay = mean(arr_delay,
                            na.rm = TRUE)) |>
     slice_max(delay,
-              n = 1)
+              n = 1) |> 
+    arrange(desc(delay))
+
 
 flights |> 
-    group_by(carrier, dest) |> 
+    dplyr::filter(carrier == "B6") |> 
+    group_by(dest) |> 
     summarize(amount = n()) |> 
     slice_max(order_by = amount,
               n = 1) |> 
-    arrange(amount)
+    arrange(desc(amount))
+```
+
+```{r Find the flights that are most delayed upon departure from each destination}
+flights |> 
+    group_by(dest) |> 
+    arrange(dest, desc(dep_delay)) |> 
+    slice_head(n = 5) |> 
+    select(dest, dep_delay)
+
+flights |> 
+    group_by(dest) |> 
+    arrange(dest, desc(dep_delay)) |> 
+    slice_max(order_by = dep_delay,
+              n = 5) |> 
+    select(dest, dep_delay)
+```
+
+```{r How do delays vary over the course of the day. Illustrate your answer with a plot.}
+flights |> 
+    group_by(hour) |>
+    summarise(mean_delay = mean(dep_delay, na.rm = TRUE)) |> 
+    ggplot(aes(x = hour, y = mean_delay)) +
+    geom_point() +
+    geom_smooth()
 ```
 
