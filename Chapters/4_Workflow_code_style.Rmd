@@ -1,0 +1,29 @@
+# Some code chung
+```{r}
+library(tidyverse)
+library(nycflights13)
+```
+
+# Plot data -----------------------------
+
+```{r}
+flights |> 
+  group_by(dest) |> 
+  summarize(
+    distance = mean(distance),
+    speed = mean(distance / air_time, na.rm = TRUE)
+  ) |> 
+  ggplot(aes(x = distance, y = speed)) +
+  geom_smooth(
+    method = "loess",
+    span = 1,
+    se = FALSE, 
+    color = "pink", 
+    linewidth = 4
+  ) +
+  geom_point()
+
+
+
+```
+

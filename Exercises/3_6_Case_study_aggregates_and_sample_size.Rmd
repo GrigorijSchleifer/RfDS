@@ -9,7 +9,8 @@ batters <- Lahman::Batting |>
 Lahman::Batting |> 
     group_by(playerID) |> 
     count(AB, H) |> 
-    summarize(performance = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE))
+    summarize(performance = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+              sum = sum(AB, na.rm = TRUE))
 
 batters |> 
   dplyr::filter(n > 100) |> 
