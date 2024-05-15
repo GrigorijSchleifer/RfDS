@@ -68,6 +68,10 @@ table2 |>
     spread(type, count) |> 
     mutate(rate = cases / population * 100000)
     
+table2 |> 
+    pivot_wider()
+
+
 table3 <- tibble(
   country = c("Afghanistan", "Afghanistan", "Brazil", "Brazil", "China", "China"),
   year = c(1999, 2000, 1999, 2000, 1999, 2000),
@@ -86,7 +90,18 @@ table3 |>
 ```
 
 ```{r}
-
+billboard |> 
+    pivot_longer(
+        # same syntax as in select
+        cols = starts_with("wk"),
+        names_to = "week",
+        values_to = "rank",
+        values_drop_na = TRUE
+    ) |> 
+    mutate(week = parse_number(week)) |> 
+    ggplot(aes(x = week, y = rank, group = track)) +
+    geom_line(alpha = 0.25) +
+    scale_y_reverse()
 ```
 
 
