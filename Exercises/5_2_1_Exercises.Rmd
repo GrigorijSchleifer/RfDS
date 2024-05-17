@@ -113,13 +113,55 @@ who2 |>
     )
 
 # this is crazy shit!
+# .value overides values_to entirely
 household |> 
     pivot_longer(
         cols = !family,
-        names_to = c(".value", "child"),
+        names_to = c(".value", "blabla"),
         names_sep = "_",
         values_drop_na = TRUE
     )
 ```
+
+```{r .values problem}
+a3 <- head(anscombe,3)
+
+
+a3 %>%
+  pivot_longer(
+    everything(),
+    names_to = c("charpart", "numpart"),
+    names_pattern = "(.)(.)"
+  )
+
+a3 %>%
+  pivot_longer(
+    everything(),
+    names_to = c(".value", "numpart"),
+    names_pattern = "(.)(.)"
+  )
+
+
+df <- tribble(
+    ~wa1, ~aj2, ~wb3, ~qc4,
+    10, 23, 37, 43,
+    51, 62, 47, 38
+)
+
+df |> 
+    pivot_longer(
+        cols = everything(),
+        names_to = c(".value", "something"),
+        names_pattern = "(.)(.)(.)"
+    )
+
+df %>%
+  pivot_longer(
+    everything(),
+    names_to = c("charpart", "numpart"),
+    names_pattern = "(.)(.)"
+  )
+```
+
 
 
