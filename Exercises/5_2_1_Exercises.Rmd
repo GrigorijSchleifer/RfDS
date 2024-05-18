@@ -127,16 +127,11 @@ household |>
 a3 <- head(anscombe,3)
 
 
-a3 %>%
-    pivot_longer(
-        everything(),
-        names_to = c("charpart", "numpart"),
-        names_pattern = "(.)(.)") |>
-    pivot_wider(
-        names_from = charpart,
-        names_to
-        )
-    
+cms_patient_experience |> 
+  pivot_wider(
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
     
 
 a3 %>%
