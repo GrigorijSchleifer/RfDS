@@ -127,11 +127,7 @@ household |>
 a3 <- head(anscombe,3)
 
 
-cms_patient_experience |> 
-  pivot_wider(
-    names_from = measure_cd,
-    values_from = prf_rate
-  )
+
     
 
 a3 %>%
@@ -162,5 +158,35 @@ df %>%
   )
 ```
 
+```{r}
+cms_patient_experience |> 
+  pivot_wider(
+    id_cols = starts_with("org"),
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
+```
 
+```{r}
+df <- tribble(
+  ~id, ~measurement, ~value,
+  "A",        "bp1",    100,
+  "B",        "bp1",    140,
+  "B",        "bp2",    115, 
+  "A",        "bp2",    120,
+  "A",        "bp3",    105
+)
+
+df |> 
+    pivot_wider(
+        id_cols = id,
+        names_from = measurement,
+        values_from = value 
+    ) |> 
+    pivot_longer(
+        cols = !id,
+        names_to = c("measurement", "value")
+    )
+
+```
 
