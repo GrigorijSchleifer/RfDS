@@ -177,16 +177,54 @@ df <- tribble(
   "A",        "bp3",    105
 )
 
+
 df |> 
     pivot_wider(
-        id_cols = id,
         names_from = measurement,
         values_from = value 
-    ) |> 
-    pivot_longer(
-        cols = !id,
-        names_to = c("measurement", "value")
     )
+
+
+df |> 
+  distinct(measurement) |> 
+  pull()
+
+
+dff <- tribble(
+  ~id, ~measurement, ~value,
+  "A",        "bp1",    100,
+  "A",        "bp1",    102,
+  "A",        "bp2",    120,
+  "B",        "bp1",    140, 
+  "B",        "bp2",    115
+)
+
+usethis::edit_rstudio_snippets()
+
+
+dff |>
+  pivot_wider(
+    names_from = measurement,
+    values_from = value
+  )
+
+dff |> 
+  group_by(id, measurement) |> 
+  summarize(n = n(), .groups = "drop") |> 
+  dplyr::filter(n > 1)
+```
+
+```{r}
+mtcars
+mtcars <- tibble::rownames_to_column(mtcars, "Model")
+
+mtcars_long <- pivot_longer(mtcars,
+             cols = mpg:carb,
+             names_to = "Category",
+             values_to = "Value"
+)
+
+glimpse(mtcars)
 
 ```
 
