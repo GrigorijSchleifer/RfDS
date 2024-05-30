@@ -188,22 +188,23 @@ df |>
 df |> 
   distinct(measurement) |> 
   pull()
+```
 
 
+```{r}
 dff <- tribble(
   ~id, ~measurement, ~value,
-  "A",        "bp1",    100,
-  "A",        "bp1",    102,
-  "A",        "bp2",    120,
-  "B",        "bp1",    140, 
-  "B",        "bp2",    115
+  "A",        "bp1a",    100,
+  "A",        "bp1b",    102,
+  "A",        "bp2a",    120,
+  "B",        "bp1c",    140, 
+  "B",        "bp2b",    115
 )
-
-usethis::edit_rstudio_snippets()
 
 
 dff |>
   pivot_wider(
+    # id_cols = -id, 
     names_from = measurement,
     values_from = value
   )
@@ -213,6 +214,7 @@ dff |>
   summarize(n = n(), .groups = "drop") |> 
   dplyr::filter(n > 1)
 ```
+
 
 ```{r}
 mtcars
@@ -226,5 +228,11 @@ mtcars_long <- pivot_longer(mtcars,
 
 glimpse(mtcars)
 
+```
+
+Snippet magic
+
+```{r}
+usethis::edit_rstudio_snippets()
 ```
 
