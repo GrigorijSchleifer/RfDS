@@ -1,0 +1,50 @@
+
+
+
+```{r}
+students <- read_csv("https://pos.it/r4ds-students-csv", na = c("N/A", ""))
+
+# change names and remove spaces
+renamed_students <- students |> 
+    rename(
+        student_id = `Student ID`,
+        full_name = `Full Name`
+    )
+
+# or
+janitor_students <- janitor::clean_names(students) |> 
+    mutate(meal_plan = factor(meal_plan),
+           age = parse_number(if_else(age == "five", "5", age)))
+
+# will skip 2 first lines
+read_csv(
+  "The first line of metadata
+  The second line of metadata
+  x,y,z
+  1,2,3",
+  skip = 2
+)
+
+# will drop the lines beginning with the # or the comments
+read_csv(
+  "# A comment I want to skip
+  x,y,z
+  1,2,3",
+  comment = "#",
+  col_names = TRUE
+  # col_names = c("a", "b")
+)
+
+read_csv(
+  "1,2,3
+  4,5,6",
+  col_names = FALSE
+)
+
+read_csv(
+  "1,2,3
+  4,5,6",
+  col_names = TRUE
+)
+```
+
