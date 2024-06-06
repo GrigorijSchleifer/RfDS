@@ -1,0 +1,30 @@
+Practice referring to non-syntactic names in the following data frame by:
+
+Extracting the variable called 1.
+Plotting a scatterplot of 1 vs. 2.
+Creating a new column called 3, which is 2 divided by 1.
+Renaming the columns to one, two, and three.
+
+```{r}
+annoying <- tibble(
+  `1` = 1:10,
+  `2` = `1` * 2 + rnorm(length(`1`))
+)
+
+annoying$'1'
+
+plot(annoying$'1'~annoying$'2')
+
+annoying |> 
+    rename(
+        "one" = `1`,       
+        "two" = `2`
+    )
+
+annoying <- annoying |> 
+    mutate(columIII = annoying$'1'/annoying$'2')
+
+janitor::clean_names(annoying)
+colnames(annoying)
+```
+
