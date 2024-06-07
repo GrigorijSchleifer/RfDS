@@ -28,3 +28,16 @@ janitor::clean_names(annoying)
 colnames(annoying)
 ```
 
+```{r}
+mtcars_csv <- write_csv(mtcars, '~/github/RfDS/mtcars.csv')
+
+cols_mtcars <- c("hp", "mpg")
+
+mtcars_spec_cols <- read_csv(file = "mtcars.csv",
+                             col_types = cols_only(hp = col_integer(),
+                                                   am = col_integer(),
+                                                   vs = col_factor(levels = c("1", "0"), 
+                                                                   include_na = FALSE)))
+```
+
+
