@@ -48,3 +48,26 @@ read_csv(
 )
 ```
 
+```{r}
+mtcars_spec_cols <- read_csv(file = "mtcars.csv",
+                             col_types = cols_only(hp = col_integer(),
+                                                   am = col_integer(),
+                                                   vs = col_factor(levels = c("1", "0"), 
+                                                                   include_na = FALSE)))
+```
+
+```{r}
+write_csv(mtcars, "~/github/RfDS/mtcars.csv")
+write_csv(mtcars, "~/github/RfDS/mtcars_two.csv")
+
+folder <- "~/github/RfDS/"
+
+csv_fls <- list.files(folder, 
+                      pattern = "*.csv")
+
+for (i in 1:length(csv_fls)) {
+    assign(csv_fls[i],
+           read_csv(paste(folder, csv_fls[i], sep ='/')))
+}
+```
+
