@@ -66,17 +66,18 @@ write_rds(mtcars, paste(folder, "mtcars_two_rds.rds", sep = "/"))
 write_rds(mtcars_spec_cols, paste(folder, "mtcars_spec_cols_rds.rds", sep = "/"))
 
 
+get_simple_regex 
+
 listed_files <- list.files(folder, 
                       pattern = "*.rds|*.csv")
-
-listed_files_otherregex <- list.files(folder, 
-                      pattern = "\\.rds$|\\.csv$")
-
 # using simple regex
 for (i in 1:length(listed_files)) {
     assign(listed_files[i],
            read_csv(paste(folder, listed_files[i], sep ='/')))
 }
+listed_files_otherregex <- list.files(folder, 
+                      pattern = "\\.rds$|\\.csv$")
+
 # using complex regex
 for (i in 1:length(listed_files_otherregex)) {
     assign(listed_files_otherregex[i],
@@ -84,18 +85,4 @@ for (i in 1:length(listed_files_otherregex)) {
 }
 ```
 
-
-```{r}
-message_on_top <- " NEF NÄHE DATTELN
-2024-2271 in 34 km EntfernungNichts gewählt
-Bitte geben Sie an, ob Sie Interesse haben oder nicht.
-ABLEHNEN INTERESSE 
-NotarztDatum: 25/06/2024
-Beginn: 08:00 UhrDauer:
-24 h 0 minEnde:
-08:00 Uhr
-Honorar: 45 €/h
-Voraussetzungen:ANGESTELLTENVERHÄLTNIS ODER PRAXISNIEDERLASSUNG NACH § 23C SGB IVMAX 24 STUNDEN AM STÜCKMASERN-IMPFSCHUTZ GEMÄSS GESETZBearbeiter: Celine Hassel
-
-```
 
