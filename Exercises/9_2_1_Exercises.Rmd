@@ -1,3 +1,5 @@
+imap kj <Esc>
+
 Create a scatterplot of hwy vs. displ where the points are pink filled in triangles.
 
 ```{r}
@@ -10,28 +12,42 @@ mpg |>
 Why did the following code not result in a plot with blue points?
 
 ```{r}
+# will not work
 ggplot(mpg) + 
   geom_point(aes(x = displ, y = hwy, color = "blue"))
 
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point(color = "blue")
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy, color = "blue"))
 
-# color should be outside of any aes()
+# will not work
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = "blue"))
 
+# will work
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(color = "blue")
+
+# will work
 ggplot(mpg) + 
   geom_point(aes(x = displ, y = hwy), color = "blue")
 
+# will kind of work 
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy), color = year)
+
+# will work
 ggplot(mpg, aes(x = displ, y = hwy)) + 
   geom_point(color = "blue")
+
 
 ```
 
 What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)
 
 ```{r}
-
+# stroke is very hight here
+ggplot(mpg) + 
+  geom_point(aes(x = displ, y = hwy), color = "blue", stroke = 100)
 ```
 
 What happens if you map an aesthetic to something other than a variable name, like aes(color = displ \< 5)? Note, you’ll also need to specify x and y.
