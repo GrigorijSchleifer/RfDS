@@ -53,7 +53,9 @@ ggplot(mpg) +
 What happens if you map an aesthetic to something other than a variable name, like aes(color = displ \< 5)? Note, you’ll also need to specify x and y.
 
 ```{r}
-
+mpg |> 
+    ggplot(aes(displ, hwy, color = displ < 6)) +
+    geom_point()
 ```
 
 ```{r}
