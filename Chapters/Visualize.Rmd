@@ -1,5 +1,4 @@
 ```{r}
-require(tidyverse)
 ```
 
 ```{r}
@@ -24,5 +23,11 @@ mpg |>
     geom_point(color = "red",
                shape = 2)
 
+```
+
+```{r}
+ggplot(mtcars, aes(x = cyl, y = qsec, color = am)) +
+    geom_point() +
+    geom_smooth(aes(linetype = as.character(am)))
 ```
 
