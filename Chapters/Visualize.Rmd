@@ -32,7 +32,7 @@ ggplot(mtcars, aes(x = cyl, y = qsec, color = am)) +
 ```
 
 ```{r}
-# will do smooth only for the points
+# will do smooth on all points
 ggplot(mpg, aes(x = displ, y = hwy)) + 
   geom_point(aes(color = class)) + 
   geom_smooth()
@@ -41,5 +41,39 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ggplot(mpg, aes(x = displ, y = hwy)) + 
   geom_point() + 
   geom_smooth(aes(color = class))
+
+# will do smooth for every class!!!
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(aes(color = class)) + 
+  geom_smooth()
+
+# will do smooth for every class!!!
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth(aes(color = class == c("minivan")))
+```
+
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_point(
+    data = mpg |> dplyr::filter(class == "2seater"), 
+    color = "red") +
+  geom_point(
+    data = mpg |> dplyr::filter(class == "2seater"), 
+    shape = "circle open", size = 3, color = "red")
+```
+
+```{r}
+ggplot(mpg, aes(x = hwy)) +
+    geom_histogram(binwidth = 2)
+
+ggplot(mpg, aes(x = hwy)) +
+    geom_density()
+
+ggplot(mpg, aes(x = hwy)) +
+    geom_boxplot()
+
 ```
 
