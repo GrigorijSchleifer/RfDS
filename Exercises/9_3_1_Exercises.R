@@ -36,6 +36,9 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
     geom_point(stroke = 5, aes(colour = drv)) +
     geom_smooth(se = FALSE)
 
+ggplot(mpg, aes(x = displ, y = hwy)) +
+    geom_point(size = 5, aes(colour = drv)) +
+    geom_smooth(se = FALSE)
 
 ggplot(mpg, aes(x = displ, y = hwy)) +
     geom_point(stroke = 5, aes(colour = drv)) +
@@ -48,5 +51,5 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 
 ggplot(mpg, aes(x = displ, y = hwy)) + 
-    geom_point(size = 4, color = "white") + 
-    geom_point(aes(color = drv))
+    geom_point(size = 4, color = "white", stroke = 10) + 
+    geom_point(shape = 22, aes(color = drv))
