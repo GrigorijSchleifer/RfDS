@@ -77,3 +77,10 @@ ggplot(mpg, aes(x = hwy)) +
 
 ```
 
+Facets
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  facet_grid(drv ~ cyl)
+```
+
